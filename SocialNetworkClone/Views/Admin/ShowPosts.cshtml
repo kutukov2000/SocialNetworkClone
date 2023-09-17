@@ -1,0 +1,15 @@
+﻿@using SocialNetworkClone.Data.Entities;
+@model List<Post>;
+<div class="d-flex flex-lg-wrap justify-content-around">
+    @foreach (var post in Model)
+    {
+        <div class="card" style="width: 18rem;height:fit-content;">
+            <img src="@post.ImageLink" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">@post.TextContent</p>
+            </div>
+        </div>
+    }
+
+</div>
+
