@@ -1,10 +1,11 @@
 ﻿@using SocialNetworkClone.Data.Entities;
 @model List<Post>;
-<div class="d-flex flex-lg-wrap justify-content-around">
+<a asp-action="AdminPage" class="btn btn-dark">Back</a>
+<div class="d-flex flex-row flex-md-wrap justify-content-center align-items-center">
     @foreach (var post in Model)
     {
-        <div class="card" style="width: 18rem;height:fit-content;">
-            <img src="@post.ImageLink" class="card-img-top" alt="...">
+        <div class="card m-4 w-50">
+            <img src="@post.ImageLink" class="card-img-top" style="height:40vh;object-fit:cover;" alt="...">
             <div class="card-body">
                 <p class="card-text">@post.TextContent</p>
             </div>
