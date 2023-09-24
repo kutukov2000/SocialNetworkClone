@@ -32,11 +32,15 @@
                 <td>@u.RegistrationDate.ToShortDateString()</td>
                 <td>@u.BirthdayDate.ToShortDateString()</td>
                 <td>
-                    <a asp-action="ShowPosts" asp-route-id="@u.Id" class="btn btn-info">View Posts</a>
+                    <a asp-action="EditUser" asp-route-id="@u.Id" class="btn btn-warning">Edit</a>
                 </td>
                 <td>
                     <a asp-action="Delete" asp-route-id="@u.Id" class="btn btn-danger">Delete</a>
                 </td>
+                <td>
+                    <a asp-action="ShowPosts" asp-route-id="@u.Id" class="btn btn-info">View Posts</a>
+                </td>
+                
             </tr>
         }
     </tbody>

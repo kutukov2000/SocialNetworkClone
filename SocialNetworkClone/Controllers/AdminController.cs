@@ -55,6 +55,30 @@ namespace SocialNetworkClone.Controllers
             return RedirectToAction(nameof(AdminPage));
         }
 
+        [HttpGet]
+        public IActionResult EditUser(int id)
+        {
+            var item = context.Users.Find(id);
+
+            if (item == null) return NotFound();
+
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            context.Users.Update(user);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(AdminPage));
+        }
+
         public IActionResult ShowPosts(int id)
         {
             var posts = context.Posts.Where(p => p.UserId == id).ToList();
