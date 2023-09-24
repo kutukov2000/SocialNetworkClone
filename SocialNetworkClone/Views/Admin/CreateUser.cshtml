@@ -1,0 +1,38 @@
+﻿@model SocialNetworkClone.Data.Entities.User;
+
+<h1>Create a new User: </h1>
+
+<form asp-action="CreateUser" method="post" class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="NickName" class="form-label">Nickname: </label>
+        <input asp-for="NickName" type="text" class="form-control" placeholder="Enter nickname">
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Password" class="form-label">Password: </label>
+        <input asp-for="Password" type="text" class="form-control" placeholder="Enter password">
+    </div>
+    <div class="col-md-6">
+        <label asp-for="FirstName" class="form-label">Firstname: </label>
+        <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter firstname">
+    </div>
+    <div class="col-md-6">
+        <label asp-for="LastName" class="form-label">Lastname: </label>
+        <input asp-for="LastName" type="text" class="form-control" placeholder="Enter firstname">
+    </div>
+    <div class="col-12">
+        <label asp-for="Email" class="form-label">Email: </label>
+        <input asp-for="Email" type="email" class="form-control" placeholder="Enter email">
+    </div>
+
+    <div class="col-12">
+        <label asp-for="BirthdayDate" class="form-label">BirthdayDate: </label>
+        <input asp-for="BirthdayDate" type="date" class="form-control">
+    </div>
+
+    <div class="col-md-6">
+        <a asp-action="AdminPage" class="btn btn-dark w-100">Back</a>
+    </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success w-100">Create</button>
+    </div>
+</form>

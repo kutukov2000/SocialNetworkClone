@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialNetworkClone.Data;
+using SocialNetworkClone.Data.Entities;
 
 namespace SocialNetworkClone.Controllers
 {
@@ -10,6 +11,48 @@ namespace SocialNetworkClone.Controllers
         {
             var Users = context.Users.ToList();
             return View(Users);
+        }
+
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateUser(User user)
+        {
+            user.RegistrationDate = DateTime.Now;
+
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+
+            context.Users.Add(user);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(AdminPage));
+        }
+        [HttpGet]
+        public IActionResult CreatePost()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreatePost(Post post)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(post);
+            }
+
+            context.Posts.Add(post);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(AdminPage));
         }
 
         public IActionResult ShowPosts(int id)

@@ -11,6 +11,6 @@
         public DateTime RegistrationDate { get; set; }
         public DateTime BirthdayDate { get; set; }
 
-        public List<Post> Posts { get; set; }
+        public List<Post>? Posts { get; set; }
     }
 }
