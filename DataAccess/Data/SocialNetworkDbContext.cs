@@ -1,15 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DataAccess.Data.Entities;
+﻿using DataAccess.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Data
 {
     public class SocialNetworkDbContext : DbContext
     {
+        public SocialNetworkDbContext() { }
+        public SocialNetworkDbContext(DbContextOptions options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SocialNetworkDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,3 +1,6 @@
+using DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace DataAccess
 {
     public class Program
@@ -6,8 +9,12 @@ namespace DataAccess
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            string connectionString = builder.Configuration.GetConnectionString("LocalDb");
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<SocialNetworkDbContext>(opts => opts.UseSqlServer(connectionString));
 
             var app = builder.Build();
 
