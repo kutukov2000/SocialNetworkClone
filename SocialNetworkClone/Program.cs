@@ -1,4 +1,6 @@
 using DataAccess.Data;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -10,6 +12,10 @@ namespace DataAccess
             var builder = WebApplication.CreateBuilder(args);
 
             string connectionString = builder.Configuration.GetConnectionString("LocalDb");
+
+            // add FluentValidator with validation classes
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
