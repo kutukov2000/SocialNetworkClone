@@ -1,26 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataAccess.Data;
 using DataAccess.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DataAccess.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly SocialNetworkDbContext _context;
+        public HomeController(SocialNetworkDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
-
         public IActionResult Index()
         {
-            return View();
-        }
+            var postsWithUsers = _context.Posts.Include(p => p.User).ToList();
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(postsWithUsers);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
