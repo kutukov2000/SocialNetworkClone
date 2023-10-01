@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SocialNetworkClone.Data;
+using DataAccess.Data;
 
 #nullable disable
 
-namespace SocialNetworkClone.Migrations
+namespace DataAccess.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
-    [Migration("20230917134654_movePosts")]
-    partial class movePosts
+    [Migration("20230917134845_newPosts")]
+    partial class newPosts
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,14 +74,21 @@ namespace SocialNetworkClone.Migrations
                         },
                         new
                         {
-                            Id = 1,
+                            Id = 6,
                             ImageLink = "https://images.unsplash.com/photo-1531564701487-f238224b7ce3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cG9zdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
                             TextContent = "Це пост користувача 5",
                             UserId = 5
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 8,
+                            ImageLink = "https://plus.unsplash.com/premium_photo-1669006982986-b87b59ff8b7c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fHBvc3R8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+                            TextContent = "Це пост користувача 3",
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
                             ImageLink = "https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cG9zdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
                             TextContent = "Це пост користувача 5",
                             UserId = 5
@@ -136,7 +143,7 @@ namespace SocialNetworkClone.Migrations
                             LastName = "Кутуков",
                             NickName = "user1",
                             Password = "hashed_password1",
-                            RegistrationDate = new DateTime(2023, 9, 17, 16, 46, 54, 813, DateTimeKind.Local).AddTicks(8000)
+                            RegistrationDate = new DateTime(2023, 9, 17, 16, 48, 45, 297, DateTimeKind.Local).AddTicks(2780)
                         },
                         new
                         {
@@ -147,7 +154,7 @@ namespace SocialNetworkClone.Migrations
                             LastName = "Довжаниця",
                             NickName = "user2",
                             Password = "hashed_password2",
-                            RegistrationDate = new DateTime(2023, 9, 17, 16, 46, 54, 813, DateTimeKind.Local).AddTicks(8128)
+                            RegistrationDate = new DateTime(2023, 9, 17, 16, 48, 45, 297, DateTimeKind.Local).AddTicks(2910)
                         },
                         new
                         {
@@ -158,7 +165,7 @@ namespace SocialNetworkClone.Migrations
                             LastName = "Панченко",
                             NickName = "user3",
                             Password = "hashed_password3",
-                            RegistrationDate = new DateTime(2023, 9, 17, 16, 46, 54, 813, DateTimeKind.Local).AddTicks(8136)
+                            RegistrationDate = new DateTime(2023, 9, 17, 16, 48, 45, 297, DateTimeKind.Local).AddTicks(2917)
                         },
                         new
                         {
@@ -169,7 +176,7 @@ namespace SocialNetworkClone.Migrations
                             LastName = "Мищук",
                             NickName = "user4",
                             Password = "hashed_password4",
-                            RegistrationDate = new DateTime(2023, 9, 17, 16, 46, 54, 813, DateTimeKind.Local).AddTicks(8141)
+                            RegistrationDate = new DateTime(2023, 9, 17, 16, 48, 45, 297, DateTimeKind.Local).AddTicks(2922)
                         },
                         new
                         {
@@ -180,7 +187,7 @@ namespace SocialNetworkClone.Migrations
                             LastName = "Павлов",
                             NickName = "user5",
                             Password = "hashed_password5",
-                            RegistrationDate = new DateTime(2023, 9, 17, 16, 46, 54, 813, DateTimeKind.Local).AddTicks(8147)
+                            RegistrationDate = new DateTime(2023, 9, 17, 16, 48, 45, 297, DateTimeKind.Local).AddTicks(2927)
                         });
                 });
 

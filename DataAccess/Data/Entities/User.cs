@@ -1,4 +1,4 @@
-﻿namespace SocialNetworkClone.Data.Entities
+﻿namespace DataAccess.Data.Entities
 {
     public class User
     {

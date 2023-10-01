@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SocialNetworkClone.Data;
+using DataAccess.Data;
 
 #nullable disable
 
-namespace SocialNetworkClone.Migrations
+namespace DataAccess.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
     partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SocialNetworkClone.Data.Entities;
+using DataAccess.Data.Entities;
 
-namespace SocialNetworkClone.Data
+namespace DataAccess.Data
 {
     public class SocialNetworkDbContext : DbContext
     {

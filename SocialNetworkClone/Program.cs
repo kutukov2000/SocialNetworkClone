@@ -1,4 +1,4 @@
-namespace SocialNetworkClone
+namespace DataAccess
 {
     public class Program
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialNetworkClone.Models;
+using DataAccess.Models;
 using System.Diagnostics;
 
-namespace SocialNetworkClone.Controllers
+namespace DataAccess.Controllers
 {
     public class HomeController : Controller
     {

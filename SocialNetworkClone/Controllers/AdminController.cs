@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialNetworkClone.Data;
-using SocialNetworkClone.Data.Entities;
+using DataAccess.Data;
+using DataAccess.Data.Entities;
 
-namespace SocialNetworkClone.Controllers
+namespace DataAccess.Controllers
 {
     public class AdminController : Controller
     {
