@@ -25,3 +25,8 @@ img {
     height: 40vh;
     object-fit: cover;
 }
+
+.avatar {
+    height: 6vh;
+    width: 6vh;
+}

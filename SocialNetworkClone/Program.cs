@@ -1,6 +1,7 @@
 using DataAccess.Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -22,6 +23,8 @@ namespace DataAccess
 
             builder.Services.AddDbContext<SocialNetworkDbContext>(opts => opts.UseSqlServer(connectionString));
 
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SocialNetworkDbContext>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -38,6 +41,8 @@ namespace DataAccess
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

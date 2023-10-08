@@ -1,9 +1,10 @@
 ﻿using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Data
 {
-    public class SocialNetworkDbContext : DbContext
+    public class SocialNetworkDbContext : IdentityDbContext
     {
         public SocialNetworkDbContext() { }
         public SocialNetworkDbContext(DbContextOptions options) : base(options) { }

@@ -10,6 +10,7 @@
         public string Password { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime BirthdayDate { get; set; }
+        public string? AvatarImageUrl { get; set; }
 
         public List<Post>? Posts { get; set; }
     }
