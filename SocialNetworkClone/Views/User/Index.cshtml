@@ -1,4 +1,28 @@
 ﻿@using DataAccess.Data.Entities;
 @model User;
+@{
+    var atSymbol = "@";
+}
+<div class="d-flex align-items-center">
+    <img class="rounded-circle" src="@Model.AvatarImageUrl" />
+    <div class="m-2">
+        <h1>@atSymbol @Model.NickName</h1>
+        <div class="d-flex">
+        <a asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-outline-secondary m-1">Edit</a>
+        <a asp-action="CreatePost" class="btn btn-outline-secondary m-1">Create New Post</a>
 
-<h1>Your Account</h1>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-lg-wrap justify-content-center">
+    @foreach (Post post in Model.Posts)
+    {
+        <div class="card m-4 w-25">
+            <img src="@post.ImageLink" class="card-img-top" alt="Post image">
+            <div class="card-body">
+                <p class="card-text">@post.TextContent</p>
+            </div>
+        </div>
+    }
+</div>

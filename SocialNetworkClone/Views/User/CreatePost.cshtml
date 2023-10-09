@@ -1,0 +1,25 @@
+﻿@model DataAccess.Data.Entities.Post;
+
+<h1>Create a new Post: </h1>
+
+<form asp-action="CreatePost" method="post">
+    <div class="mb-3">
+        <label asp-for="TextContent" class="form-label">Text content: </label>
+        <textarea asp-for="TextContent" class="form-control" rows="3" placeholder="Enter text content: "></textarea>
+        <span asp-validation-for="TextContent" class="form-text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ImageLink" class="form-label">Image link: </label>
+        <input asp-for="ImageLink" type="url" class="form-control" placeholder="Enter image link: ">
+        <span asp-validation-for="ImageLink" class="form-text text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a asp-action="Index" class="btn btn-dark w-100">Back</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </div>
+    </div>
+</form>
