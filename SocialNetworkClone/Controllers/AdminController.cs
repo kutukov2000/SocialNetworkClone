@@ -1,5 +1,6 @@
 ﻿using DataAccess.Data;
 using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataAccess.Controllers
@@ -7,9 +8,12 @@ namespace DataAccess.Controllers
     public class AdminController : Controller
     {
         private readonly SocialNetworkDbContext _context;
-        public AdminController(SocialNetworkDbContext context)
+        private readonly UserManager<User> userManager;
+
+        public AdminController(SocialNetworkDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
         public IActionResult AdminPage()
         {
@@ -32,7 +36,6 @@ namespace DataAccess.Controllers
             {
                 return View(user);
             }
-
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -60,13 +63,14 @@ namespace DataAccess.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditUser(int id)
+        public IActionResult EditUser(string id)
         {
-            var item = _context.Users.Find(id);
+            User user = _context.Users.Find(id);
+            //var user = _context.Users.Where(x => x.Id == id).FirstOrDefault();
 
-            if (item == null) return NotFound();
+            if (user == null) return NotFound();
 
-            return View(item);
+            return View(user);
         }
 
         [HttpPost]
@@ -77,13 +81,21 @@ namespace DataAccess.Controllers
                 return View(user);
             }
 
-            _context.Users.Update(user);
+            User userToChange = _context.Users.Find(user.Id);
+
+            userToChange.NickName = user.NickName;
+            userToChange.FirstName = user.FirstName;
+            userToChange.LastName = user.LastName;
+            userToChange.BirthdayDate = user.BirthdayDate;
+            userToChange.AvatarImageUrl = user.AvatarImageUrl;
+
+            _context.Users.Update(userToChange);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(AdminPage));
         }
 
-        public IActionResult ShowPosts(int id)
+        public IActionResult ShowPosts(string id)
         {
             var posts = _context.Posts.Where(p => p.UserId == id).ToList();
 
@@ -93,13 +105,13 @@ namespace DataAccess.Controllers
         }
 
         // delete user by ID
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
-            var item = _context.Users.Find(id);
+            var user = _context.Users.Where(x => x.Id == id).FirstOrDefault();
 
-            if (item == null) return NotFound();
+            if (user == null) return NotFound();
 
-            _context.Users.Remove(item);
+            _context.Users.Remove(user);
             _context.SaveChanges();
 
             return RedirectToAction("AdminPage");

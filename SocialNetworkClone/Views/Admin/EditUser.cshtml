@@ -3,15 +3,16 @@
 <h1>Edit User: </h1>
 
 <form asp-action="EditUser" method="post" class="row g-3">
+    <input asp-for="Id" hidden/>
+    <div class="col-md-6">
+        <label asp-for="Email" class="form-label">Email: </label>
+        <input asp-for="Email" type="email" class="form-control" placeholder="Enter email">
+        <span asp-validation-for="Email" class="form-text text-danger"></span>
+    </div>
     <div class="col-md-6">
         <label asp-for="NickName" class="form-label">Nickname: </label>
         <input asp-for="NickName" type="text" class="form-control" placeholder="Enter nickname">
         <span asp-validation-for="NickName" class="form-text text-danger"></span>
-    </div>
-    <div class="col-md-6">
-        <label asp-for="Password" class="form-label">Password: </label>
-        <input asp-for="Password" type="text" class="form-control" placeholder="Enter password">
-        <span asp-validation-for="Password" class="form-text text-danger"></span>
     </div>
     <div class="col-md-6">
         <label asp-for="FirstName" class="form-label">Firstname: </label>
@@ -20,13 +21,8 @@
     </div>
     <div class="col-md-6">
         <label asp-for="LastName" class="form-label">Lastname: </label>
-        <input asp-for="LastName" type="text" class="form-control" placeholder="Enter firstname">
+        <input asp-for="LastName" type="text" class="form-control" placeholder="Enter lastname">
         <span asp-validation-for="LastName" class="form-text text-danger"></span>
-    </div>
-    <div class="col-12">
-        <label asp-for="Email" class="form-label">Email: </label>
-        <input asp-for="Email" type="email" class="form-control" placeholder="Enter email">
-        <span asp-validation-for="Email" class="form-text text-danger"></span>
     </div>
 
     <div class="col-12">

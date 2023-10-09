@@ -9,12 +9,10 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Avatar</th>
             <th scope="col">NickName</th>
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Password</th>
             <th scope="col">RegistrationDate</th>
             <th scope="col">BirthdayDate</th>
             <th scope="col">Posts</th>
@@ -25,7 +23,6 @@
         @foreach (var u in Model)
         {
             <tr class="align-middle">
-                <th scope="row">@u.Id</th>
                 @if (@u.AvatarImageUrl == null)
                 {
                     <td><img class="avatar rounded-circle" src="https://cdn-icons-png.flaticon.com/128/3177/3177440.png" /></td>
@@ -37,13 +34,12 @@
                 <td>@u.NickName</td>
                 <td>@u.FirstName @u.LastName</td>
                 <td>@u.Email</td>
-                <td>@u.Password</td>
                 <td>@u.RegistrationDate.ToShortDateString()</td>
                 <td>@u.BirthdayDate.ToShortDateString()</td>
                 <td>
                     <a asp-action="ShowPosts" asp-route-id="@u.Id" class="btn btn-info">View Posts</a>
                 </td>
-                <td>
+                <td class="d-flex">
                     <a asp-action="EditUser" asp-route-id="@u.Id" class="btn btn-warning">Edit</a>
                     <a asp-action="Delete" asp-route-id="@u.Id" class="btn btn-danger">Delete</a>
                 </td>

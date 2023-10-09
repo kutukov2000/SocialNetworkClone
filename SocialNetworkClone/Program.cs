@@ -1,7 +1,7 @@
 using DataAccess.Data;
+using DataAccess.Data.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -23,7 +23,7 @@ namespace DataAccess
 
             builder.Services.AddDbContext<SocialNetworkDbContext>(opts => opts.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SocialNetworkDbContext>();
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SocialNetworkDbContext>();
 
             var app = builder.Build();
 
