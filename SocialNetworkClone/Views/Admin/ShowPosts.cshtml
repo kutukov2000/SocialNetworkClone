@@ -1,6 +1,7 @@
 ﻿@using DataAccess.Data.Entities;
 @model List<Post>;
 <a asp-action="AdminPage" class="btn btn-dark">Back</a>
+<h2 class="text-center">Count of posts: @Model.Count</h2>
 <div class="d-flex flex-row flex-md-wrap justify-content-center align-items-center">
     @foreach (var post in Model)
     {

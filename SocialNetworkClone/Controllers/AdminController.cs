@@ -101,8 +101,6 @@ namespace DataAccess.Controllers
         {
             var posts = _context.Posts.Where(p => p.UserId == id).ToList();
 
-            if (posts.Count == 0) return NotFound();
-
             return View(posts);
         }
 
