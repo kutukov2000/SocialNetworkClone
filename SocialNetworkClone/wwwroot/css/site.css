@@ -35,6 +35,24 @@ img {
     height:fit-content;
 
     position:relative;
-    left:-2.5vw;
-    top:0.5vw;
+    left:90%;
+    top:-90%;
+}
+
+.w-30{ 
+    width:30%!important;
+}
+
+a {
+    all: unset;
+
+    cursor:pointer;
+}
+
+.accountLink{
+    transition:.2s;
+}
+
+.accountLink:hover{
+    scale:1.1;
 }

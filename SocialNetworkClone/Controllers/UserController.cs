@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace SocialNetworkClone.Controllers
 {
-    [Authorize]
+
     public class UserController : Controller
     {
         private readonly SocialNetworkDbContext _context;
@@ -16,11 +16,22 @@ namespace SocialNetworkClone.Controllers
         {
             _context = context;
         }
+        [Authorize]
         public IActionResult Index()
         {
             User currentUser = _context.Users.Include(x => x.Posts).Where(x => x.Id == _currentUserId).FirstOrDefault();
 
+            ViewBag.CurrentUserId = _currentUserId;
+
             return View(currentUser);
+        }
+        public IActionResult ShowUserPage(string userId)
+        {
+            User currentUser = _context.Users.Include(x => x.Posts).Where(x => x.Id == userId).FirstOrDefault();
+
+            ViewBag.CurrentUserId = _currentUserId;
+
+            return View(nameof(Index), currentUser);
         }
         [HttpGet]
         public IActionResult CreatePost()
