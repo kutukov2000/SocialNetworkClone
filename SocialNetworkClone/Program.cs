@@ -2,7 +2,9 @@ using DataAccess.Data;
 using DataAccess.Data.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SocialNetworkClone.Helpers;
 
 namespace DataAccess
 {
@@ -23,9 +25,26 @@ namespace DataAccess
 
             builder.Services.AddDbContext<SocialNetworkDbContext>(opts => opts.UseSqlServer(connectionString));
 
-            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SocialNetworkDbContext>();
-
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+            .AddDefaultTokenProviders()
+            .AddDefaultUI()
+            .AddEntityFrameworkStores<SocialNetworkDbContext>();
             var app = builder.Build();
+
+            // identity roles and admin user initialization
+            using (IServiceScope scope = app.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+
+                // seed roles
+                SeedExtensions.SeedRoles(serviceProvider).Wait();
+
+                // seed admin
+                SeedExtensions.SeedAdmin(serviceProvider).Wait();
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -40,6 +59,7 @@ namespace DataAccess
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();
