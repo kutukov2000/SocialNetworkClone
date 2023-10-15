@@ -30,3 +30,11 @@ img {
     height: 5vh;
     width: 5vh;
 }
+
+.editPostButton{
+    height:fit-content;
+
+    position:relative;
+    left:-2.5vw;
+    top:0.5vw;
+}

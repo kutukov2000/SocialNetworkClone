@@ -74,5 +74,36 @@ namespace SocialNetworkClone.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult EditPost(int id)
+        {
+            Post post = _context.Posts.Find(id);
+
+            if (post == null) return NotFound();
+
+            return View(post);
+        }
+
+
+        [HttpPost]
+        public IActionResult EditPost(Post post)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(post);
+            }
+
+            Post postToChange = _context.Posts.Find(post.Id);
+
+            postToChange.UserId = _currentUserId;
+            postToChange.TextContent = post.TextContent;
+            postToChange.ImageLink = post.ImageLink;
+
+            _context.Posts.Update(postToChange);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

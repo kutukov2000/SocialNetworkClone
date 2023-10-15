@@ -8,9 +8,8 @@
     <div class="m-2">
         <h1>@atSymbol @Model.NickName</h1>
         <div class="d-flex">
-        <a asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-outline-secondary m-1">Edit</a>
-        <a asp-action="CreatePost" class="btn btn-outline-secondary m-1">Create New Post</a>
-
+            <a asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-outline-secondary m-1">Edit</a>
+            <a asp-action="CreatePost" class="btn btn-outline-secondary m-1">Create New Post</a>
         </div>
     </div>
 </div>
@@ -18,11 +17,14 @@
 <div class="d-flex flex-lg-wrap justify-content-center">
     @foreach (Post post in Model.Posts)
     {
-        <div class="card m-4 w-25">
+            <div class="card w-25">
             <img src="@post.ImageLink" class="card-img-top" alt="Post image">
             <div class="card-body">
                 <p class="card-text">@post.TextContent</p>
             </div>
         </div>
+        <a asp-action="EditPost" asp-route-id="@post.Id" class="editPostButton">
+            <?xml version="1.0" ?><svg class="feather feather-edit" fill="none" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </a>
     }
 </div>
