@@ -2,9 +2,11 @@
 @model List<User>;
 
 <h1>User Manage Panel</h1>
-
-<a asp-action="CreateUser" class="btn btn-primary my-2">Create New User</a>
-<a asp-action="CreatePost" class="btn btn-primary my-2">Create New Post</a>
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="CreateUser" class="btn btn-primary my-2">Create New User</a>
+    <a asp-action="CreatePost" class="btn btn-primary my-2">Create New Post</a>
+}
 
 <table class="table table-striped">
     <thead>
@@ -12,11 +14,17 @@
             <th scope="col">Avatar</th>
             <th scope="col">NickName</th>
             <th scope="col">Full Name</th>
-            <th scope="col">Email</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th scope="col">Email</th>
+            }
             <th scope="col">RegistrationDate</th>
             <th scope="col">BirthdayDate</th>
             <th scope="col">Posts</th>
-            <th scope="col">Actions</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th scope="col">Actions</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -29,21 +37,26 @@
                 }
                 else
                 {
-                <td><img class="avatar rounded-circle" src="@u.AvatarImageUrl" /></td>
+                    <td><img class="avatar rounded-circle" src="@u.AvatarImageUrl" /></td>
                 }
                 <td>@u.NickName</td>
                 <td>@u.FirstName @u.LastName</td>
-                <td>@u.Email</td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>@u.Email</td>
+                }
                 <td>@u.RegistrationDate.ToShortDateString()</td>
                 <td>@u.BirthdayDate.ToShortDateString()</td>
                 <td>
                     <a asp-action="ShowPosts" asp-route-id="@u.Id" class="btn btn-info">View Posts</a>
                 </td>
-                <td class="d-flex">
-                    <a asp-action="EditUser" asp-route-id="@u.Id" class="btn btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@u.Id" class="btn btn-danger">Delete</a>
-                </td>
-                
+                @if (User.IsInRole("Admin"))
+                {
+                    <td class="d-flex">
+                        <a asp-action="EditUser" asp-route-id="@u.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@u.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

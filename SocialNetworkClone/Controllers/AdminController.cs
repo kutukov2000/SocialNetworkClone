@@ -1,10 +1,12 @@
 ﻿using DataAccess.Data;
 using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataAccess.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly SocialNetworkDbContext _context;
@@ -15,6 +17,7 @@ namespace DataAccess.Controllers
             _context = context;
             this.userManager = userManager;
         }
+        [AllowAnonymous]
         public IActionResult AdminPage()
         {
             var Users = _context.Users.ToList();
@@ -66,7 +69,6 @@ namespace DataAccess.Controllers
         public IActionResult EditUser(string id)
         {
             User user = _context.Users.Find(id);
-            //var user = _context.Users.Where(x => x.Id == id).FirstOrDefault();
 
             if (user == null) return NotFound();
 
@@ -94,7 +96,7 @@ namespace DataAccess.Controllers
 
             return RedirectToAction(nameof(AdminPage));
         }
-
+        [AllowAnonymous]
         public IActionResult ShowPosts(string id)
         {
             var posts = _context.Posts.Where(p => p.UserId == id).ToList();
