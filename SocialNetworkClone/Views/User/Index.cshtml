@@ -9,6 +9,8 @@
     string ownerId = Model.Id;
 
     bool isOwnerUser = userId == ownerId;
+
+    int dataIndex = 0;
 }
 <div class="d-flex align-items-center w-100">
     <img class="rounded-circle" src="@Model.AvatarImageUrl" />
@@ -29,7 +31,7 @@
 <div class="d-flex flex-lg-wrap justify-content-space-between gap-3 mt-4 w-100">
     @foreach (Post post in Model.Posts)
     {
-        <div class="w-30">
+        <div class="w-30 openModal" data-index="@dataIndex">
             <div class="card w-100">
             <img src="@post.ImageLink" class="card-img-top" alt="Post image">
             <div class="card-body">
@@ -39,10 +41,34 @@
         @if (isOwnerUser)
         {
             <a asp-action="EditPost" asp-route-id="@post.Id" class="editPostButton">
-                <?xml version="1.0" ?><svg class="feather feather-edit" fill="none" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <?xml version="1.0" ?><svg class="feather feather-edit accountLink" fill="none" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             </a>
         }
         </div>
+        
+        <!-- Modal window -->
+        <div class="modal justify-content-center align-items-center">
+            <div class="modal-content">
+                <span class="close" data-index="@dataIndex">&times;</span>
+                <div class="w-100 d-flex h-100 gap-2">
+                    <div class="w-60 h-100">
+                        <img src="@post.ImageLink" class="card-img-top w-100 h-85" alt="Post image">
+                    </div>
+                    <div class="w-40 h-100">
+                        <a asp-controller="User" asp-action="ShowUserPage" asp-route-userId="@post.UserId">
+                            <div class="card-header d-flex align-items-center">
+                                <img src="@post.User.AvatarImageUrl" class="avatar rounded-circle accountLink" />
+                                <p class="card-text m-2">@atSymbol@post.User.NickName</p>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <p class="card-text">@post.TextContent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        dataIndex++;
     }
 </div>
 
