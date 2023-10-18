@@ -12,5 +12,6 @@ namespace DataAccess.Data.Entities
         public string? AvatarImageUrl { get; set; }
 
         public List<Post>? Posts { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
     }
 }
