@@ -15,7 +15,7 @@ namespace DataAccess.Controllers
         }
         public IActionResult Index()
         {
-            var postsWithUsers = _context.Posts.Include(p => p.User).Include(p => p.Comments).ToList();
+            var postsWithUsers = _context.Posts.Include(p => p.User).Include(p => p.Comments).ThenInclude(c => c.User).ToList();
 
             return View(postsWithUsers);
         }

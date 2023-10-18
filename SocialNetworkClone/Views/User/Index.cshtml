@@ -15,7 +15,7 @@
 <div class="d-flex align-items-center w-100">
     <img class="rounded-circle" src="@Model.AvatarImageUrl" />
     <div class="m-3">
-        <h1>@atSymbol @Model.NickName</h1>
+        <h1 class="nick-name">@atSymbol@Model.NickName</h1>
         <h3>Posts: @Model.Posts.Count</h3>
         @if (isOwnerUser)
         {
@@ -65,9 +65,17 @@
                             <div>
                                 <p class="card-text">@post.TextContent</p>
                                 @foreach (var comment in post.Comments)
-                                {
-                                    <p>@comment.Text</p>
-                                }
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <a asp-controller="User" asp-action="ShowUserPage" asp-route-userId="@comment.AuthorUserId">
+                                                <div class="d-flex align-items-center">
+                                                <img src="@comment.User.AvatarImageUrl" class="avatar rounded-circle accountLink" />
+                                                <p class="card-text m-2 nick-name">@atSymbol@comment.User.NickName</p>
+                                                </div>
+                                            </a>
+                                            <p class="card-text">@comment.Text</p>
+                                        </div>
+                                    }
                             </div>
 
                             <form asp-controller="User" asp-action="AddComment" class="d-flex">

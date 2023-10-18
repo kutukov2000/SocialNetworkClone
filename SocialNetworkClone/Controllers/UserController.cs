@@ -19,7 +19,7 @@ namespace SocialNetworkClone.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            User currentUser = _context.Users.Include(x => x.Posts)!.ThenInclude(p => p.Comments).Where(x => x.Id == _currentUserId).FirstOrDefault()!;
+            User currentUser = _context.Users.Include(x => x.Posts)!.ThenInclude(p => p.Comments).ThenInclude(c => c.User).Where(x => x.Id == _currentUserId).FirstOrDefault()!;
 
             ViewBag.CurrentUserId = _currentUserId;
 
@@ -27,7 +27,7 @@ namespace SocialNetworkClone.Controllers
         }
         public IActionResult ShowUserPage(string userId)
         {
-            User currentUser = _context.Users.Include(x => x.Posts)!.ThenInclude(p => p.Comments).Where(x => x.Id == userId).FirstOrDefault()!;
+            User currentUser = _context.Users.Include(x => x.Posts)!.ThenInclude(p => p.Comments).ThenInclude(c => c.User).Where(x => x.Id == userId).FirstOrDefault()!;
 
             ViewBag.CurrentUserId = _currentUserId;
 
@@ -127,7 +127,8 @@ namespace SocialNetworkClone.Controllers
             Comment comment = new Comment()
             {
                 Text = commentText,
-                PostId = postId
+                PostId = postId,
+                AuthorUserId = _currentUserId,
             };
 
             _context.Comments.Add(comment);

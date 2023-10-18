@@ -65,6 +65,10 @@ a {
     cursor:pointer;
 }
 
+.nick-name{
+    font-weight:bold;
+}
+
 .accountLink{
     transition:.2s;
 }
