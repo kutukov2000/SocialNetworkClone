@@ -19,7 +19,7 @@ namespace SocialNetworkClone.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            User currentUser = _context.Users.Include(x => x.Posts).Where(x => x.Id == _currentUserId).FirstOrDefault();
+            User currentUser = _context.Users.Include(x => x.Posts)!.ThenInclude(p => p.Comments).Where(x => x.Id == _currentUserId).FirstOrDefault()!;
 
             ViewBag.CurrentUserId = _currentUserId;
 
@@ -27,7 +27,7 @@ namespace SocialNetworkClone.Controllers
         }
         public IActionResult ShowUserPage(string userId)
         {
-            User currentUser = _context.Users.Include(x => x.Posts).Where(x => x.Id == userId).FirstOrDefault();
+            User currentUser = _context.Users.Include(x => x.Posts)!.ThenInclude(p => p.Comments).Where(x => x.Id == userId).FirstOrDefault()!;
 
             ViewBag.CurrentUserId = _currentUserId;
 
@@ -115,6 +115,38 @@ namespace SocialNetworkClone.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public IActionResult AddComment(string commentText, int postId)
+        {
+            if (string.IsNullOrWhiteSpace(commentText))
+            {
+                return StayOnCurrentPage();
+            }
+
+            Comment comment = new Comment()
+            {
+                Text = commentText,
+                PostId = postId
+            };
+
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            return StayOnCurrentPage();
+        }
+
+        private IActionResult StayOnCurrentPage()
+        {
+            if (Request.Headers["Referer"].Count > 0)
+            {
+                string referrer = Request.Headers["Referer"].ToString();
+                return Redirect(referrer);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

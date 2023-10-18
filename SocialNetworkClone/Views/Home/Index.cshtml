@@ -39,8 +39,20 @@
                                 <p class="card-text m-2">@atSymbol@post.User.NickName</p>
                             </div>
                         </a>
-                        <div class="card-body">
-                            <p class="card-text">@post.TextContent</p>
+                        <div class="card-body d-flex flex-column justify-content-between h-86">
+                            <div>
+                                <p class="card-text">@post.TextContent</p>
+                                @foreach (var comment in post.Comments)
+                                {
+                                    <p>@comment.Text</p>
+                                }
+                            </div>
+
+                            <form asp-controller="User" asp-action="AddComment" class="d-flex">
+                                <input type="text" name="commentText" class="form-control" placeholder="Add comment...">
+                                <input type="hidden" name="postId" value="@post.Id" />
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
