@@ -19,10 +19,23 @@ namespace DataAccess.Data
                         .WithMany(u => u.Comments)
                         .HasForeignKey(c => c.AuthorUserId);
 
+            modelBuilder.Entity<UserSubscription>()
+                        .HasOne(us => us.Subscriber)
+                        .WithMany(u => u.Subscribers)
+                        .HasForeignKey(us => us.SubscriberId)
+                        .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<UserSubscription>()
+                        .HasOne(us => us.SubscribedTo)
+                        .WithMany(u => u.Subscriptions)
+                        .HasForeignKey(us => us.SubscribedToId)
+                        .OnDelete(DeleteBehavior.NoAction);
+
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<UserSubscription> UserSubscriptions { get; set; }
     }
 }
