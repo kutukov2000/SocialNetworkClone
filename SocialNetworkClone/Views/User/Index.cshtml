@@ -32,11 +32,14 @@
                 <a asp-action="CreatePost" class="btn btn-outline-secondary m-1">Create New Post</a>
             </div>
         }
-        @if(!isOwnerUser && !isUserSubscribe)
+        else if (!isUserSubscribe)
         {
-            <a asp-action="Subscribe" asp-route-userId="@ownerId" class="btn btn-outline-secondary m-1">Subscribers</a>
+            <a asp-action="Subscribe" asp-route-userId="@ownerId" class="btn btn-primary m-1">Subscribe</a>
         }
-
+        else
+        {
+            <a asp-action="Unsubscribe" asp-route-userId="@ownerId" class="btn btn-outline-secondary m-1">Unsubscribe</a>
+        }
     </div>
 </div>
 

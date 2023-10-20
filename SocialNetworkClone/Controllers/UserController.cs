@@ -60,6 +60,18 @@ namespace SocialNetworkClone.Controllers
 
             return StayOnCurrentPage();
         }
+        public IActionResult Unsubscribe(string userId)
+        {
+            UserSubscription subscriptionToRemove = _context.UserSubscriptions
+                .Where(u => u.SubscribedToId == _currentUserId && u.SubscriberId == userId)
+                .FirstOrDefault();
+
+            _context.UserSubscriptions.Remove(subscriptionToRemove);
+
+            _context.SaveChanges();
+
+            return StayOnCurrentPage();
+        }
         [HttpGet]
         public IActionResult CreatePost()
         {
