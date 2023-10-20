@@ -14,7 +14,7 @@ namespace DataAccess.Data.Entities
         public List<Post>? Posts { get; set; }
         public ICollection<Comment>? Comments { get; set; }
 
-        public ICollection<UserSubscription> Subscribers { get; set; }
-        public ICollection<UserSubscription> Subscriptions { get; set; }
+        public ICollection<UserSubscription>? Subscribers { get; set; }
+        public ICollection<UserSubscription>? Subscriptions { get; set; }
     }
 }
