@@ -19,7 +19,14 @@ namespace SocialNetworkClone.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            User currentUser = _context.Users.Include(x => x.Posts)!.ThenInclude(p => p.Comments).ThenInclude(c => c.User).Where(x => x.Id == _currentUserId).FirstOrDefault()!;
+            User currentUser = _context.Users
+                .Include(u => u.Subscribers)
+                .Include(u => u.Subscriptions)
+                .Include(x => x.Posts)
+                    .ThenInclude(p => p.Comments)
+                        .ThenInclude(c => c.User)
+                 .Where(x => x.Id == _currentUserId)
+                 .FirstOrDefault()!;
 
             ViewBag.CurrentUserId = _currentUserId;
 
@@ -27,11 +34,31 @@ namespace SocialNetworkClone.Controllers
         }
         public IActionResult ShowUserPage(string userId)
         {
-            User currentUser = _context.Users.Include(x => x.Posts)!.ThenInclude(p => p.Comments).ThenInclude(c => c.User).Where(x => x.Id == userId).FirstOrDefault()!;
+            User currentUser = _context.Users
+                .Include(u => u.Subscribers)
+                .Include(u => u.Subscriptions)
+                .Include(x => x.Posts)
+                    .ThenInclude(p => p.Comments)
+                        .ThenInclude(c => c.User)
+                 .Where(x => x.Id == userId)
+                 .FirstOrDefault()!;
 
             ViewBag.CurrentUserId = _currentUserId;
 
             return View(nameof(Index), currentUser);
+        }
+        public IActionResult Subscribe(string userId)
+        {
+            _context.UserSubscriptions.Add(
+                new UserSubscription
+                {
+                    SubscriberId = userId,
+                    SubscribedToId = _currentUserId
+                });
+
+            _context.SaveChanges();
+
+            return StayOnCurrentPage();
         }
         [HttpGet]
         public IActionResult CreatePost()

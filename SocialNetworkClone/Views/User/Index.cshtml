@@ -10,6 +10,12 @@
 
     bool isOwnerUser = userId == ownerId;
 
+    bool isUserSubscribe = false;
+    if (Model.Subscribers.Any())
+    {
+        isUserSubscribe = Model.Subscribers.Where(u => u.SubscribedToId == userId).Any();
+    }
+
     int dataIndex = 0;
 }
 <div class="d-flex align-items-center w-100">
@@ -17,12 +23,18 @@
     <div class="m-3">
         <h1 class="nick-name">@atSymbol@Model.NickName</h1>
         <h3>Posts: @Model.Posts.Count</h3>
+        <h3>Subscribers: @Model.Subscribers.Count</h3>
+        <h3>Subscriptions: @Model.Subscriptions.Count</h3>
         @if (isOwnerUser)
         {
             <div class="d-flex">
                 <a asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-outline-secondary m-1">Edit</a>
                 <a asp-action="CreatePost" class="btn btn-outline-secondary m-1">Create New Post</a>
             </div>
+        }
+        @if(!isOwnerUser && !isUserSubscribe)
+        {
+            <a asp-action="Subscribe" asp-route-userId="@ownerId" class="btn btn-outline-secondary m-1">Subscribers</a>
         }
 
     </div>
