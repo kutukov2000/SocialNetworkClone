@@ -14,7 +14,7 @@ namespace DataAccess
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            string connectionString = builder.Configuration.GetConnectionString("AzureDb");
+            string connectionString = builder.Configuration.GetConnectionString("AzureDb")!;
 
             // add FluentValidator with validation classes
             builder.Services.AddFluentValidationAutoValidation();

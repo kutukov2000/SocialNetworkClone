@@ -68,7 +68,7 @@ namespace DataAccess.Controllers
         [HttpGet]
         public IActionResult EditUser(string id)
         {
-            User user = _context.Users.Find(id);
+            User? user = _context.Users.Find(id);
 
             if (user == null) return NotFound();
 
@@ -83,7 +83,7 @@ namespace DataAccess.Controllers
                 return View(user);
             }
 
-            User userToChange = _context.Users.Find(user.Id);
+            User userToChange = _context.Users.Find(user.Id)!;
 
             userToChange.NickName = user.NickName;
             userToChange.FirstName = user.FirstName;
