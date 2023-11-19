@@ -11,6 +11,8 @@ namespace DataAccess.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlServer("Server=tcp:kutukov-artur-azure-server.database.windows.net,1433;Initial Catalog=SocialNetworkClone-AzureDb;Persist Security Info=False;User ID=kutukov2000;Password=#4\"^%9c=F=.au_2\r\n;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
